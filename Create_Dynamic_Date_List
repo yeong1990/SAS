@@ -1,0 +1,31 @@
+%let start_date=31Mar2008;
+
+%let end_date=01Feb2018;
+
+data want_month;
+
+date="&start_date"d;
+
+do while (date<="&end_date"d);
+
+
+    date=intnx('month', date, 1, 'e');
+
+
+    output;
+
+end;
+
+format date date9.;
+
+run;
+
+data want_month;
+set want_month;
+
+N=_n_;
+
+	call symput('Date_'||left(N),date);
+
+test = symget(&Date_18);
+run;
